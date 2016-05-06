@@ -143,6 +143,10 @@ public class CmdLineParser {
 				"class attribute which will be omnitted by this program. Assumed that class is in the second "
 				+ "column (attribute) in input file.");
 		
+		options.addOption("in", "instance-name", false, "Provided input file contains also a name of every instance, " +
+				"which will be omnitted by this program. Assumed that class is in the third "
+				+ "column (attribute) in input file when class attribute is provided or in the second column otherwise.");
+		
 		options.addOption("sv", "skip-visualisation", false, "Program will skip printing the visualisations as images. "
 				+ "Only hierarchy statistic file will be produced.");
 		
@@ -207,6 +211,7 @@ public class CmdLineParser {
 		
 		paramsToSet.setDisplayAllPoints(cmd.hasOption("da"));
 		paramsToSet.setClassAttribute(cmd.hasOption("c"));
+		paramsToSet.setInstanceName(cmd.hasOption("in"));
 		paramsToSet.setSkipVisualisations(cmd.hasOption("sv"));
 	}
 	

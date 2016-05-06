@@ -18,6 +18,16 @@ public class Parameters {
 	private int numberOfHistogramBins;
 	private boolean displayAllPoints;
 	private boolean classAttribute;
+	private boolean instanceName;
+	
+	public boolean getInstanceName() {
+		return instanceName;
+	}
+
+	public void setInstanceName(boolean instanceName) {
+		this.instanceName = instanceName;
+	}
+
 	private boolean skipVisualisations;
 	
 	public Color getCurrentLevelColor() {

@@ -13,12 +13,13 @@ import visualisation.Visualisation;
 public class CLIRun {
 	public static void main(String[] args) {
 		args = new String[]{
-				"-i", "balancedTree5000.csv",//"visualisationTest.csv",//"lowerPartsDenseShallowTree.csv",//"sparseDeepTree.csv",//"balancedTree5000.csv",//"denseShallowTree.csv",//"easy3Simply.txt",
-				"-o", "balancedTree5000FALSE",
+				"-i", "Edge_tool_n03265032.sbow.csv",//"visualisationTest.csv",//"lowerPartsDenseShallowTree.csv",//"sparseDeepTree.csv",//"balancedTree5000.csv",//"denseShallowTree.csv",//"easy3Simply.txt",
+				"-o", "Edge_tool_n03265032.sbow",
 				"-bg", "white",
 //				"-h",
 //				"-lg", "white",
-//				"-c",
+				"-c",
+				"-in",
 				"-da",
 				"-ps", "3.0",
 				"-w", "500",
@@ -32,11 +33,11 @@ public class CLIRun {
 		Hierarchy inputData = null;
 		if(params.getInputDataFilePath().getFileName().toString().endsWith(".csv"))
 		{
-			inputData = new GeneratedCSVReader().load(params.getInputDataFilePath().toString(), params.isClassAttribute(), false);//TODO: z ostatniego booleana mozna zrobic flage
+			inputData = new GeneratedCSVReader().load(params.getInputDataFilePath().toString(), params.getInstanceName(), params.isClassAttribute(), false);//TODO: z ostatniego booleana mozna zrobic flage
 		}
 		else if(params.getInputDataFilePath().getFileName().toString().endsWith(".arff"))
 		{
-			inputData = new GeneratedARFFReader().load(params.getInputDataFilePath().toString(), params.isClassAttribute(), false);//TODO: z ostatniego booleana mozna zrobic flage
+			inputData = new GeneratedARFFReader().load(params.getInputDataFilePath().toString(), params.getInstanceName(), params.isClassAttribute(), false);//TODO: z ostatniego booleana mozna zrobic flage
 		}
 		else
 		{
