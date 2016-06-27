@@ -412,7 +412,7 @@ public class Visualisation {
 	private BufferedImage createHierarchyImage(Tree hierarchyVisualisation, String currentNodeId, Parameters params) {
 		boolean isFound = false;
 		
-for(int i = 0; i < hierarchyVisualisation.getNodeCount(); i++)
+		for(int i = 0; i < hierarchyVisualisation.getNodeCount(); i++)
 		{
 			prefuse.data.Node n = hierarchyVisualisation.getNode(i);
 			n.setInt(utils.Constants.PREFUSE_NODE_ROLE_COLUMN_NAME, ElementRole.OTHER.getNumber());
@@ -462,7 +462,7 @@ for(int i = 0; i < hierarchyVisualisation.getNodeCount(); i++)
 		
 		Visualization vis = new Visualization();
 		Display display = new Display(vis);
-		display.setBackground(new Color(-1));
+		display.setBackground(new Color(Constants.DEFAULT_BACKGROUND_COLOR));
 		display.setHighQuality(true);
 		
 		vis.add(utils.Constants.NAME_OF_HIERARCHY, hierarchyVisualisation);
@@ -508,7 +508,7 @@ for(int i = 0; i < hierarchyVisualisation.getNodeCount(); i++)
 	    for(int x = 0; x < imgWidth; x++) {
 	        if (startWidth == 0) {
 	            for (int y = 0; y < imgHeight; y++) {
-	                if (img.getRGB(x, y) != params.getBackgroundColor().getRGB()) {
+	                if (img.getRGB(x, y) != Constants.DEFAULT_BACKGROUND_COLOR) {
 	                    startWidth = x;
 	                    break;
 	                }
@@ -522,7 +522,7 @@ for(int i = 0; i < hierarchyVisualisation.getNodeCount(); i++)
 	    for(int x = imgWidth - 1; x >= 0; x--) {
 	        if (endWidth == 0) {
 	            for (int y = 0; y < imgHeight; y++) {
-	                if (img.getRGB(x, y) != params.getBackgroundColor().getRGB()) {
+	                if (img.getRGB(x, y) != Constants.DEFAULT_BACKGROUND_COLOR) {
 	                    endWidth = x;
 	                    break;
 	                }
