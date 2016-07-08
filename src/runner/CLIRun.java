@@ -3,7 +3,7 @@ package runner;
 import java.io.File;
 
 import basic_hierarchy.interfaces.Hierarchy;
-import basic_hierarchy.reader.GeneratedARFFReader;
+//import basic_hierarchy.reader.GeneratedARFFReader;
 import basic_hierarchy.reader.GeneratedCSVReader;
 import utils.CmdLineParser;
 import utils.HierarchyStatistics;
@@ -12,21 +12,7 @@ import visualisation.Visualisation;
 
 public class CLIRun {
 	public static void main(String[] args) {
-		args = new String[]{
-				"-i", "Edge_tool_n03265032.sbow.csv",//"visualisationTest.csv",//"lowerPartsDenseShallowTree.csv",//"sparseDeepTree.csv",//"balancedTree5000.csv",//"denseShallowTree.csv",//"easy3Simply.txt",
-				"-o", "Edge_tool_n03265032.sbow",
-				"-bg", "white",
-//				"-h",
-//				"-lg", "white",
-				"-c",
-				"-in",
-				"-da",
-				"-ps", "3.0",
-				"-w", "500",
-				"-ht", "500",
-				"-b", "100",
-//				"-sv"
-				};
+
 		CmdLineParser parser = new CmdLineParser();
 		Parameters params = parser.parse(args);
 		
@@ -35,14 +21,14 @@ public class CLIRun {
 		{
 			inputData = new GeneratedCSVReader().load(params.getInputDataFilePath().toString(), params.getInstanceName(), params.isClassAttribute(), false);//TODO: z ostatniego booleana mozna zrobic flage
 		}
-		else if(params.getInputDataFilePath().getFileName().toString().endsWith(".arff"))
-		{
-			inputData = new GeneratedARFFReader().load(params.getInputDataFilePath().toString(), params.getInstanceName(), params.isClassAttribute(), false);//TODO: z ostatniego booleana mozna zrobic flage
-		}
+//		else if(params.getInputDataFilePath().getFileName().toString().endsWith(".arff"))
+//		{
+//			inputData = new GeneratedARFFReader().load(params.getInputDataFilePath().toString(), params.getInstanceName(), params.isClassAttribute(), false);//TODO: z ostatniego booleana mozna zrobic flage
+//		}
 		else
 		{
 			System.err.println("Unrecognised extension of input file: " + params.getInputDataFilePath().getFileName()
-					+ " only *.csv and *.arff files are supported.");
+					+ " only *.csv files are supported.");//and *.arff files are supported.");
 			System.exit(1);
 		}
 		

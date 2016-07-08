@@ -82,7 +82,7 @@ public class Parameters {
 		return pointScallingFactor;
 	}
 
-	public void setPointScallingFactor(double pointScallingFactor) {
+	public void setPointScalingFactor(double pointScallingFactor) {
 		this.pointScallingFactor = pointScallingFactor;
 	}
 

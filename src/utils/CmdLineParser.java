@@ -35,102 +35,105 @@ public class CmdLineParser {
 		Option input = OptionBuilder.withArgName("file path")
 				.hasArgs(1)
 				.isRequired(false)
-				.withDescription("path to file with input data")
+				.withDescription("Path to file with input data. It could be a properly formatted *.csv file.")// or weka *.arff file.")
 				.withLongOpt("input")
 				.create('i');
 		
 		Option output = OptionBuilder.withArgName("directory path")
 				.hasArgs(1)
 				.isRequired(false)
-				.withDescription("path where to store *.PNG files showing each hierarchy level")
+				.withDescription("Path where output *.PNG files showing every hierarchy level and a *.csv file with hierarchy"
+						+ "statistics will be stored.")
 				.withLongOpt("output")
 				.create('o');
 		
 		Option backgroundColor = OptionBuilder.withArgName("color")
 				.hasArgs(1)
 				.isRequired(false)
-				.withDescription("background color of every outpuy image. Possible values: {green, black, blue, lightBlue, yellow, " + 
-						"cyan, lightGray, gray, darkGray, magenta, orange, pink, red, white}. Default: transparent.")
+				.withDescription("Background color of every output image. Possible values: {green, black, blue, lightBlue, yellow," + 
+						" cyan, lightGray, gray, darkGray, magenta, orange, pink, red, white}. Default: white.")
 				.withLongOpt("background-color")
 				.create("bg");
 		
 		Option currentGroup = OptionBuilder.withArgName("color")
 				.hasArgs(1)
 				.isRequired(false)
-				.withDescription("color in which indicate current Level Group on the output " +
-						"images. Possible values: {green, black, blue, lightBlue, yellow, cyan, lightGray, " +
-						"gray, darkGray, magenta, orange, pink, red, white}. Default: red.")
+				.withDescription("Color in which indicate current Level Group on the output" +
+						" images. Possible values: {green, black, blue, lightBlue, yellow, cyan, lightGray," +
+						" gray, darkGray, magenta, orange, pink, red, white}. Default: red.")
 				.withLongOpt("current-level-group-color")
 				.create("lg");
 		
 		Option childGroup = OptionBuilder.withArgName("color")
 				.hasArgs(1)
 				.isRequired(false)
-				.withDescription("color in which indicate all Child Groups (successors) on the output " +
-						"images. Possible values: {green, black, blue, lightBlue, yellow, cyan, lightGray, " +
-						"gray, darkGray, magenta, orange, pink, red, white}. Default: green.")
+				.withDescription("Color in which all Child Groups (successors) will be painted on the output"
+						+ " images. Possible values: {green, black, blue, lightBlue, yellow, cyan, lightGray,"
+						+ " gray, darkGray, magenta, orange, pink, red, white}. Default: green.")
 				.withLongOpt("child-group-color")
 				.create("cg");
 		
 		Option parentGroup = OptionBuilder.withArgName("color")
 				.hasArgs(1)
 				.isRequired(false)
-				.withDescription("color in which indicate direct Parent Groups (ancessors) on the output " +
-						"images. Possible values: {green, black, blue, lightBlue, yellow, cyan, lightGray, " +
-						"gray, darkGray, magenta, orange, pink, red, white}. Default: black. " +
-						"In order to display this points, the -da flag should be set.")
+				.withDescription("Color in which direct Parent Group (immediate ancestor) will be painted on"
+						+ " the output images. Possible values: {green, black, blue, lightBlue, yellow, cyan,"
+						+ " lightGray, gray, darkGray, magenta, orange, pink, red, white}. Default: blue."
+						+ " To display this points, the -da flag must be set.")
 				.withLongOpt("parent-group-color")
 				.create("pg");
 		
 		Option parentAncestorsGroup = OptionBuilder.withArgName("color")
 				.hasArgs(1)
 				.isRequired(false)
-				.withDescription("color in which indicate direct Parents' all Ancestors groups on the output " +
-						"images. Possible values: {green, black, blue, lightBlue, yellow, cyan, lightGray, " +
-						"gray, darkGray, magenta, orange, pink, red, white}. Default: lightBlue. " +
-						"In order to display this points, the -da flag should be set.")
-				.withLongOpt("parent-group-color")
+				.withDescription("Color in which current Parent group all ancestors will be painted"
+						+ " on the output images. Possible values: {green, black, blue, lightBlue, yellow, cyan,"
+						+ " lightGray, gray, darkGray, magenta, orange, pink, red, white}. Default: lightBlue."
+						+ " To display this points, the -da flag must be set.")
+				.withLongOpt("parent-ancestors-group-color")
 				.create("pa");
 
 		Option otherGroup = OptionBuilder.withArgName("color")
 				.hasArgs(1)
 				.isRequired(false)
-				.withDescription("color in which indicate all Ohild Groups (e.g. siblings) on the output " +
-						"images. Possible values: {green, black, blue, lightBlue, yellow, cyan, lightGray, " +
-						"gray, darkGray, magenta, orange, pink, red, white}. Default: lightGray. " +
-						"In order to display this points, the -da flag should be set.")
+				.withDescription("Color in which all Other Groups (e.g. siblings) will be painted on the "
+						+ "output images. Possible values: {green, black, blue, lightBlue, yellow, cyan, "
+						+ "lightGray, gray, darkGray, magenta, orange, pink, red, white}. Default: lightGray. "
+						+ "To display this points, the -da flag must be set.")
 				.withLongOpt("other-group-color")
 				.create("og");
 		
 		Option imageWidth = OptionBuilder.withArgName("pixel number")
 				.hasArgs(1)
 				.isRequired(false)
-				.withDescription("width of the output images in pixels. Default: 800 px.")
+				.withDescription("Width of the instances visualisation part (center image) on the outputimages."
+						+ " Provided in pixels. Default: 800 px.")
 				.withLongOpt("images-width")
 				.create("w");
 		
 		Option imageHeight = OptionBuilder.withArgName("pixel number")
 				.hasArgs(1)
 				.isRequired(false)
-				.withDescription("height of the output images in pixels. Default: 600 px.")
+				.withDescription("Height of the instances visualisation part (center image)"+
+						" on the output images. Provided in pixels. Default: 600 px.")
 				.withLongOpt("images-height")
 				.create("ht");
 		
 		Option pointScale = OptionBuilder.withArgName("real number")
 				.hasArgs(1)
 				.isRequired(false)
-				.withDescription("scalling factor (floating point number) of points drawn on images. Default: 1.0 (no scalling)")
+				.withDescription("Scaling factor (floating point number) of points drawn on images. Default: 1.0 (no scaling).")
 				.withLongOpt("point-scale")
 				.create("ps");
 		
 		Option binsNumber = OptionBuilder.withArgName("number of bins")
 				.hasArgs(1)
 				.isRequired(false)
-				.withDescription("number of each histogram bins. Default: 100.")
+				.withDescription("Number of each histogram bins. Default: 100.")
 				.withLongOpt("bins-number")
 				.create("b");
 		
-		Option help = OptionBuilder.withDescription("prints this message")
+		Option help = OptionBuilder.withDescription("Prints this message.")
 				.hasArg(false)
 				.isRequired(false)
 				.withLongOpt("help")
@@ -139,16 +142,16 @@ public class CmdLineParser {
 		options.addOption("da", "display-all", false, "Display all point on the output images, " +
 				"so the other non-child groups (e.g. siblings and all parent groups) are also displayed.");
 		
-		options.addOption("c", "class-attribute", false, "Provided input file contains also a ground truth, " +
-				"class attribute which will be omnitted by this program. Assumed that class is in the second "
-				+ "column (attribute) in input file.");
+		options.addOption("c", "class-attribute", false, "Provided input file contains also a ground truth class assignment."
+				+ " Class attribute will be omitted by this program. Assumed that class is in the second column (attribute)"
+				+ " in the input file.");
 		
-		options.addOption("in", "instance-name", false, "Provided input file contains also a name of every instance, " +
-				"which will be omnitted by this program. Assumed that class is in the third "
-				+ "column (attribute) in input file when class attribute is provided or in the second column otherwise.");
+		options.addOption("in", "instance-name", false, "Provided input file contains also an unique name of every instance, which "
+				+ "will be omitted by this program. Assumed that instance names are in the third column (attribute) in "
+				+ "input file when the class attribute is also provided or in the second column otherwise.");
 		
-		options.addOption("sv", "skip-visualisation", false, "Program will skip printing the visualisations as images. "
-				+ "Only hierarchy statistic file will be produced.");
+		options.addOption("sv", "skip-visualisation", false, "Program will skip printing the output visualisations (images)."
+				+ " Only hierarchy statistic file will be produced.");
 		
 		options.addOption(input);
 		options.addOption(output);
@@ -191,20 +194,20 @@ public class CmdLineParser {
 		paramsToSet.setInputDataFilePath(parseInputFile());
 		paramsToSet.setOutputFolder(parseOutputFile());
 		
-		paramsToSet.setBackgroundColor(parseColor(cmd.getOptionValue("bg", "transparent"), true));
-		paramsToSet.setCurrentLevelColor(parseColor(cmd.getOptionValue("lg", "red"), false));
-		paramsToSet.setChildGroupsColor(parseColor(cmd.getOptionValue("cg", "green"), false));
-		paramsToSet.setParentGroupsColor(parseColor(cmd.getOptionValue("pg", "blue"), false));
-		paramsToSet.setParentAncestorsColor(parseColor(cmd.getOptionValue("pa", "lightBlue"), false));
-		paramsToSet.setOtherGroupsColor(parseColor(cmd.getOptionValue("og", "lightGray"), false));
+		paramsToSet.setBackgroundColor(parseColor(cmd.getOptionValue("bg", "white")));
+		paramsToSet.setCurrentLevelColor(parseColor(cmd.getOptionValue("lg", "red")));
+		paramsToSet.setChildGroupsColor(parseColor(cmd.getOptionValue("cg", "green")));
+		paramsToSet.setParentGroupsColor(parseColor(cmd.getOptionValue("pg", "blue")));
+		paramsToSet.setParentAncestorsColor(parseColor(cmd.getOptionValue("pa", "lightBlue")));
+		paramsToSet.setOtherGroupsColor(parseColor(cmd.getOptionValue("og", "lightGray")));
 		
 		paramsToSet.setImageWidth(parsePositiveIntegerParameter(cmd.getOptionValue("w", "800"),
 				"Image width should be a positive integer number pointing number of pixels."));
 		paramsToSet.setImageHeight(parsePositiveIntegerParameter(cmd.getOptionValue("ht", "600"),
 				"Image height should be a positive integer number pointing number of pixels."));
 
-		paramsToSet.setPointScallingFactor(parsePositiveDoubleParameter(cmd.getOptionValue("ps", "1.0"),
-				"Points scalling factor should be a positive real number."));
+		paramsToSet.setPointScalingFactor(parsePositiveDoubleParameter(cmd.getOptionValue("ps", "1.0"),
+				"Points scaling factor should be a positive real number."));
 		
 		paramsToSet.setNumberOfHistogramBins(parsePositiveIntegerParameter(cmd.getOptionValue("b", "100"), 
 				"Number of bins should be a positive integer number."));
@@ -215,7 +218,7 @@ public class CmdLineParser {
 		paramsToSet.setSkipVisualisations(cmd.hasOption("sv"));
 	}
 	
-	private Color parseColor(String optionValue, boolean parseAlsoTransparent) {
+	private Color parseColor(String optionValue) {
 		Color returnValue = null;
 		switch(optionValue)
 		{
@@ -261,18 +264,12 @@ public class CmdLineParser {
 		case "white":
 			returnValue = Color.white;
 			break;
-		case "transparent":
-			returnValue = new Color(-1);
-			break;
 		default:
-			if(!parseAlsoTransparent && !optionValue.equals("transparent"))
-			{
-				System.err.println("Cannor parse color: " + optionValue + ". "
-						+ "It should be one of {green, black, blue, lightBlue, yellow, " +
-						"cyan, lightGray, gray, darkGray, magenta, orange, " +
-						"pink, red, white}.");
-				System.exit(1);
-			}
+			System.err.println("Cannor parse color: " + optionValue + "."
+					+ " It should be one of {green, black, blue, lightBlue, yellow," 
+					+ " cyan, lightGray, gray, darkGray, magenta, orange,"
+					+ " pink, red, white}.");
+			System.exit(1);
 		}
 		return returnValue;
 	}
@@ -349,7 +346,7 @@ public class CmdLineParser {
 
 	private void viewHelp()
 	{		 
-		helpText.printHelp( "HierarchyVisualisation", options );
+		helpText.printHelp( "java -jar hierarchy_visualisator.jar", options );
 	}	
 	
 	private Path parseInputFile()
