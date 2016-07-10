@@ -35,7 +35,7 @@ public class CmdLineParser {
 		Option input = OptionBuilder.withArgName("file path")
 				.hasArgs(1)
 				.isRequired(false)
-				.withDescription("Path to file with input data. It could be a properly formatted *.csv file.")// or weka *.arff file.")
+				.withDescription("Path to file with input data. It should be a properly formatted *.csv file.")// or weka *.arff file.")
 				.withLongOpt("input")
 				.create('i');
 		
@@ -58,7 +58,7 @@ public class CmdLineParser {
 		Option currentGroup = OptionBuilder.withArgName("color")
 				.hasArgs(1)
 				.isRequired(false)
-				.withDescription("Color in which indicate current Level Group on the output" +
+				.withDescription("Color which indicates current Level Group on the output" +
 						" images. Possible values: {green, black, blue, lightBlue, yellow, cyan, lightGray," +
 						" gray, darkGray, magenta, orange, pink, red, white}. Default: red.")
 				.withLongOpt("current-level-group-color")
@@ -67,7 +67,7 @@ public class CmdLineParser {
 		Option childGroup = OptionBuilder.withArgName("color")
 				.hasArgs(1)
 				.isRequired(false)
-				.withDescription("Color in which all Child Groups (successors) will be painted on the output"
+				.withDescription("Color whit which all Child Groups (successors) will be painted on the output"
 						+ " images. Possible values: {green, black, blue, lightBlue, yellow, cyan, lightGray,"
 						+ " gray, darkGray, magenta, orange, pink, red, white}. Default: green.")
 				.withLongOpt("child-group-color")
@@ -76,30 +76,30 @@ public class CmdLineParser {
 		Option parentGroup = OptionBuilder.withArgName("color")
 				.hasArgs(1)
 				.isRequired(false)
-				.withDescription("Color in which direct Parent Group (immediate ancestor) will be painted on"
+				.withDescription("Color with which direct Parent Group (immediate ancestor) will be painted on"
 						+ " the output images. Possible values: {green, black, blue, lightBlue, yellow, cyan,"
 						+ " lightGray, gray, darkGray, magenta, orange, pink, red, white}. Default: blue."
-						+ " To display this points, the -da flag must be set.")
+						+ " To display these points, the -da flag must be set.")
 				.withLongOpt("parent-group-color")
 				.create("pg");
 		
 		Option parentAncestorsGroup = OptionBuilder.withArgName("color")
 				.hasArgs(1)
 				.isRequired(false)
-				.withDescription("Color in which current Parent group all ancestors will be painted"
+				.withDescription("Color with which current Parent group all ancestors will be painted"
 						+ " on the output images. Possible values: {green, black, blue, lightBlue, yellow, cyan,"
 						+ " lightGray, gray, darkGray, magenta, orange, pink, red, white}. Default: lightBlue."
-						+ " To display this points, the -da flag must be set.")
+						+ " To display these points, the -da flag must be set.")
 				.withLongOpt("parent-ancestors-group-color")
 				.create("pa");
 
 		Option otherGroup = OptionBuilder.withArgName("color")
 				.hasArgs(1)
 				.isRequired(false)
-				.withDescription("Color in which all Other Groups (e.g. siblings) will be painted on the "
+				.withDescription("Color with which all Other Groups (e.g. siblings) will be painted on the "
 						+ "output images. Possible values: {green, black, blue, lightBlue, yellow, cyan, "
 						+ "lightGray, gray, darkGray, magenta, orange, pink, red, white}. Default: lightGray. "
-						+ "To display this points, the -da flag must be set.")
+						+ "To display these points, the -da flag must be set.")
 				.withLongOpt("other-group-color")
 				.create("og");
 		
@@ -139,19 +139,19 @@ public class CmdLineParser {
 				.withLongOpt("help")
 				.create('h');
 		
-		options.addOption("da", "display-all", false, "Display all point on the output images, " +
+		options.addOption("da", "display-all", false, "Display all points on the output images, " +
 				"so the other non-child groups (e.g. siblings and all parent groups) are also displayed.");
 		
 		options.addOption("c", "class-attribute", false, "Provided input file contains also a ground truth class assignment."
 				+ " Class attribute will be omitted by this program. Assumed that class is in the second column (attribute)"
 				+ " in the input file.");
 		
-		options.addOption("in", "instance-name", false, "Provided input file contains also an unique name of every instance, which "
+		options.addOption("in", "instance-name", false, "Provided input file contains also a unique name of every instance, which "
 				+ "will be omitted by this program. Assumed that instance names are in the third column (attribute) in "
 				+ "input file when the class attribute is also provided or in the second column otherwise.");
 		
 		options.addOption("sv", "skip-visualisation", false, "Program will skip printing the output visualisations (images)."
-				+ " Only hierarchy statistic file will be produced.");
+				+ " Only hierarchy statistics file will be produced.");
 		
 		options.addOption(input);
 		options.addOption(output);
