@@ -40,8 +40,8 @@ public class HierarchyStatistics {
 	private String statsToVisualiseOnImages, statsToWriteOutInFile;
 	private HashMap<Integer, Integer> nodeBranchFactorAndCountOfNodesWithThatFactor;
 	
-	private double[] avgNumberOfChilderPerNodeOnEachHeight;
-	private double[] stdevNumberOfChilderPerNodeOnEachHeight;
+	private double[] avgNumberOfChildrenPerNodeOnEachHeight;
+	private double[] stdevNumberOfChildrenPerNodeOnEachHeight;
 	
 	private double[] hierarchyWidthOnEachHeight;
 	private double avgHierarchyWidth;
@@ -73,8 +73,8 @@ public class HierarchyStatistics {
 		eachLevelNumberOfInstances = new int[hierarchyHeight + 1];
 		overallNumberOfInstances = 0;
 		nodeBranchFactorAndCountOfNodesWithThatFactor = new HashMap<Integer, Integer>();
-		avgNumberOfChilderPerNodeOnEachHeight = new double[hierarchyHeight + 1];
-		stdevNumberOfChilderPerNodeOnEachHeight = new double[hierarchyHeight + 1];
+		avgNumberOfChildrenPerNodeOnEachHeight = new double[hierarchyHeight + 1];
+		stdevNumberOfChildrenPerNodeOnEachHeight = new double[hierarchyHeight + 1];
 		LinkedList<AbstractMap.SimpleEntry<Integer, Integer>> nodeHeightWithItsChildrenCount = new LinkedList<>();
 		hierarchyWidthOnEachHeight = new double[hierarchyHeight + 1];
 		numberOfLeavesOnEachHeight = new double[hierarchyHeight + 1];
@@ -125,7 +125,7 @@ public class HierarchyStatistics {
 			
 			Integer numOfChildren = currentNode.getChildren().size();
 			nodeHeightWithItsChildrenCount.add(new AbstractMap.SimpleEntry<Integer, Integer>(height, numOfChildren));
-			avgNumberOfChilderPerNodeOnEachHeight[height] += numOfChildren;
+			avgNumberOfChildrenPerNodeOnEachHeight[height] += numOfChildren;
 			
 			if(nodeBranchFactorAndCountOfNodesWithThatFactor.containsKey(numOfChildren))
 			{
@@ -183,22 +183,22 @@ public class HierarchyStatistics {
 			}
 		}
 		
-		for(int i = 0; i < avgNumberOfChilderPerNodeOnEachHeight.length; i++)
+		for(int i = 0; i < avgNumberOfChildrenPerNodeOnEachHeight.length; i++)
 		{
-			avgNumberOfChilderPerNodeOnEachHeight[i] /= hierarchyWidthOnEachHeight[i];
+			avgNumberOfChildrenPerNodeOnEachHeight[i] /= hierarchyWidthOnEachHeight[i];
 		}
 		
 		for(AbstractMap.SimpleEntry<Integer, Integer> elem: nodeHeightWithItsChildrenCount)
 		{
 			int height = elem.getKey();
 			int count = elem.getValue();
-			stdevNumberOfChilderPerNodeOnEachHeight[height] += (count - avgNumberOfChilderPerNodeOnEachHeight[height])
-					*(count - avgNumberOfChilderPerNodeOnEachHeight[height]); 
+			stdevNumberOfChildrenPerNodeOnEachHeight[height] += (count - avgNumberOfChildrenPerNodeOnEachHeight[height])
+					*(count - avgNumberOfChildrenPerNodeOnEachHeight[height]);
 		}
 		
-		for(int i = 0; i < avgNumberOfChilderPerNodeOnEachHeight.length; i++)
+		for(int i = 0; i < avgNumberOfChildrenPerNodeOnEachHeight.length; i++)
 		{
-			stdevNumberOfChilderPerNodeOnEachHeight[i] /= hierarchyWidthOnEachHeight[i];
+			stdevNumberOfChildrenPerNodeOnEachHeight[i] /= hierarchyWidthOnEachHeight[i];
 		}
 		
 	}
@@ -313,8 +313,8 @@ public class HierarchyStatistics {
 					Math.round((eachLevelNumberOfInstances[i]/(double)overallNumberOfInstances)*10000)/100.0;
 			statsToVisualiseOnImages += results;
 			statsToWriteOutInFile += results;//TODO: dodac reszte informacji
-			statsToWriteOutInFile += Constants.CSV_FILE_SEPARATOR + avgNumberOfChilderPerNodeOnEachHeight[i] + Constants.CSV_FILE_SEPARATOR 
-					+ stdevNumberOfChilderPerNodeOnEachHeight[i] + Constants.CSV_FILE_SEPARATOR + hierarchyWidthOnEachHeight[i]
+			statsToWriteOutInFile += Constants.CSV_FILE_SEPARATOR + avgNumberOfChildrenPerNodeOnEachHeight[i] + Constants.CSV_FILE_SEPARATOR
+					+ stdevNumberOfChildrenPerNodeOnEachHeight[i] + Constants.CSV_FILE_SEPARATOR + hierarchyWidthOnEachHeight[i]
 					+ Constants.CSV_FILE_SEPARATOR + numberOfLeavesOnEachHeight[i];
 		}
 		
