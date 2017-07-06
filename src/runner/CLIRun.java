@@ -1,6 +1,7 @@
 package runner;
 
 import java.io.File;
+import java.io.IOException;
 
 import basic_hierarchy.interfaces.Hierarchy;
 //import basic_hierarchy.reader.GeneratedARFFReader;
@@ -19,8 +20,12 @@ public class CLIRun {
 		Hierarchy inputData = null;
 		if(params.getInputDataFilePath().getFileName().toString().endsWith(".csv"))
 		{
-			inputData = new GeneratedCSVReader().load(params.getInputDataFilePath().toString(), params.getInstanceName(), params.isClassAttribute(), false);//TODO: z ostatniego booleana mozna zrobic flage
-		}
+            try {
+                inputData = new GeneratedCSVReader().load(params.getInputDataFilePath().toString(), params.getInstanceName(), params.isClassAttribute(), false, false, true);//TODO: z ostatniego booleana mozna zrobic flage
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 //		else if(params.getInputDataFilePath().getFileName().toString().endsWith(".arff"))
 //		{
 //			inputData = new GeneratedARFFReader().load(params.getInputDataFilePath().toString(), params.getInstanceName(), params.isClassAttribute(), false);//TODO: z ostatniego booleana mozna zrobic flage
